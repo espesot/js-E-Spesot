@@ -40,6 +40,7 @@ const validarIngresante = (ingresantes, nuevoIngresante) => {
     }
 }
 
+
 //const ingresante = new ingresante()
 //export{ingresante} 
 export {Ingresante, validarIngresante}

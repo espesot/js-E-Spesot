@@ -1,5 +1,6 @@
-import { Ingresante, validarIngresante } from "./ingresanteClass.js"
+import { Ingresante, validarIngresante} from "./ingresanteClass.js"
 
+//---------- Aplicamos operador OR
 const ingresantes = JSON.parse(sessionStorage.getItem('Ingresantes')) || []
 
 
@@ -25,7 +26,10 @@ document.querySelector('#fingresante').addEventListener('submit', (Event) => {
 
             //guardamos en el sesionStorage el ingresante
             sessionStorage.setItem('Ingresantes', JSON.stringify(ingresantes))
-            dibujarListaIngresantes(ingresantes)
+
+            ingresantes.lenght != 0 ? dibujarListaIngresantes(ingresantes): console.info("no hay ingresante par dibujar")
+            //dibujarListaIngresantes(ingresantes)
+            
             //se limpia el formulario
             document.querySelector('#nomIns').value = ""
             document.querySelector('#Ape').value = ""
@@ -63,6 +67,9 @@ const dibujarListaIngresantes = (ingresantes) => {
 
 }
 
-if (ingresantes.lenght != 0) {
-    dibujarListaIngresantes(ingresantes)
-}
+//--------- se aplica ternario
+ingresantes.lenght != 0 ? dibujarListaIngresantes(ingresantes) : console.error("no hay ingresante para dibujar")
+
+// if (ingresantes.lenght != 0) {
+//     dibujarListaIngresantes(ingresantes)
+// }

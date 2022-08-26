@@ -87,6 +87,9 @@ const listaAlumnos = (alumnos) => {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const saveAlumnos = JSON.parse( sessionStorage.getItem("alumnos"))
-    listaAlumnos(saveAlumnos)
+    const saveAlumnos = JSON.parse( sessionStorage.getItem("alumnos")) || [] 
+    saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")  
+    
+    //listaAlumnos(saveAlumnos)
+
 })
