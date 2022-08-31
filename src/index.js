@@ -55,11 +55,20 @@ document.querySelector('#falumno').addEventListener('submit', (Event) => {
 
     sessionStorage.setItem('alumnos', JSON.stringify(alumnos))
     // //se limpia el folmuria
-    document.querySelector('#nom').value = ""
+    document.querySelector('#dniAlumno').value = ""
     document.querySelector('#mat').value = ""
     document.querySelector('#len').value = ""
     document.querySelector('#his').value = ""
     listaAlumnos(alumnos)
+
+    //agregamos sweetaleert
+    Swal.fire({
+        position: 'top',
+        icon: 'success',
+        title: 'Las Notas Fueron Cargadas',
+        showConfirmButton: false,
+        timer: 1000
+      })
 
 })
 // se utiliza para remplaza el QuerySelector
