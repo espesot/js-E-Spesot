@@ -3,9 +3,9 @@
         {
         "nombre": "Enzo",
         "notas":{
-            "nMatematica": 8, 
-            "nLengua": 7,
-            "nHistoria" : 9}
+            "nMatematica": 9, 
+            "nLengua": 8,
+            "nHistoria" : 8}
         },
         {
         "nombre": "Ivan",

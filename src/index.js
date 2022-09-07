@@ -25,23 +25,25 @@ class Alumno {
 
 }
 
-
-//const alumnos = [];
-
-// alumnos.push(new Alumno("Enzo", 8, 7, 6))
-// alumnos.push(new Alumno("Ivan", 9, 7, 9))
-// alumnos.push(new Alumno("Martin", 5, 7, 6))
-// alumnos.push(new Alumno("Juan", 6, 7, 6))
-
-const alumnos = fetch('./json/alumnos.json')
-    .then((res) =>{ 
-        return res.json()
-    })
-    
-    
+const getAlumnos = async () => {
+    try {
+        const fetchData = await fetch('../src/json/alumnos.json')
+        const jsonAlumnos = await fetchData.json()
+        return jsonAlumnos
+    } catch (error) {
+        return error
+    }
+}
 
 
 
+
+const jsonAlumnos = await getAlumnos()
+
+const alumnos = [];
+jsonAlumnos.Alumnos.forEach(alumno => {
+    alumnos.push(new Alumno(alumno.nombre, alumno.notas.nMatematica, alumno.notas.nLengua, alumno.notas.nHistoria))
+})
 
 
 //Guardamos en la sesion local
@@ -83,9 +85,7 @@ document.querySelector('#falumno').addEventListener('submit', (Event) => {
 })
 // se utiliza para remplaza el QuerySelector
 const curso = document.querySelector('#curso')
-
 console.log(curso)
-
 
 const listaAlumnos = (alumnos) => {
     let Lista = ""
@@ -105,10 +105,7 @@ const listaAlumnos = (alumnos) => {
     //  document.querySelector("#curso").innerHTML = Lista
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const saveAlumnos = JSON.parse( sessionStorage.getItem("alumnos")) || [] 
-    saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")  
-    
-    //listaAlumnos(saveAlumnos)
+const saveAlumnos = JSON.parse( sessionStorage.getItem("alumnos")) || []
+saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")
 
-})
+
