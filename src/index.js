@@ -26,15 +26,25 @@ class Alumno {
 }
 
 
-const alumnos = [];
+//const alumnos = [];
 
-alumnos.push(new Alumno("Enzo", 8, 7, 6))
-alumnos.push(new Alumno("Ivan", 9, 7, 9))
-alumnos.push(new Alumno("Martin", 5, 7, 6))
-alumnos.push(new Alumno("Juan", 6, 7, 6))
+// alumnos.push(new Alumno("Enzo", 8, 7, 6))
+// alumnos.push(new Alumno("Ivan", 9, 7, 9))
+// alumnos.push(new Alumno("Martin", 5, 7, 6))
+// alumnos.push(new Alumno("Juan", 6, 7, 6))
+
+const alumnos = fetch('./json/alumnos.json')
+    .then((res) =>{ 
+        return res.json()
+    })
+    
+    
+
+
+
+
 
 //Guardamos en la sesion local
-
 sessionStorage.setItem('alumnos', JSON.stringify(alumnos))
 
 document.querySelector('#falumno').addEventListener('submit', (Event) => {

@@ -1,0 +1,33 @@
+{
+    "Alumnos":[
+        {
+        "nombre": "Enzo",
+        "notas":{
+            "nMatematica": 8, 
+            "nLengua": 7,
+            "nHistoria" : 9}
+        },
+        {
+        "nombre": "Ivan",
+        "notas":{
+            "nMatematica": 9, 
+            "nLengua": 8,
+            "nHistoria" : 9}
+        },
+        {
+        "nombre": "Juan",
+        "notas":{
+            "nMatematica": 6, 
+            "nLengua": 7,
+            "nHistoria" : 8}
+        },
+        {
+        "nombre": "Martin",
+        "notas":{
+            "nMatematica": 7, 
+            "nLengua": 7,
+            "nHistoria" : 6}
+        }
+        
+    ]
+}
