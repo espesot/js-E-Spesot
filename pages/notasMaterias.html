@@ -28,38 +28,44 @@
         </div>
     </nav>
 
-    <div class="container ">
-        <form class="bg-light" id="falumno" action="">
+    <div class="container">
+
+        <!-- Form busqueda alumno por DNI -->
+        <form class="bg-light" id="busqueda" action="">
             <h2 class="display-4">Notas de Alumno</h2>
-            <div class="form-group mb-3 form-control">
-                <label class="col-sm-2 col-form-label" for="">Nombre</label>
-                <input type="text" id="dniAlumno" placeholder="Nombre">
 
-                <label class="col-sm-2 col-form-label" for=""></label>
-                <label class="col-sm-2 col-form-label" for=""></label>
-
+            <div id="busqueda" class="form-group mb-3">
+                <label for="dniAlumno">DNI</label>
+                <input class="form-control" type="number" id="dniAlumno" placeholder="11.111.111">
             </div>
-            <div class="form-group mb-3 form-control">
-                <label class="col-sm-2 col-form-label" for="">Matemáticas</label>
-                <input type="number" id="mat" placeholder="Nota de Matemática">
 
-
-            </div>
-            <div class="form-group mb-3 form-control">
-                <label class="col-sm-2 col-form-label" for="">Lengua</label>
-                <input type="number" id="len" placeholder="Nota de Lengua">
-
-            </div>
-            <div class="form-group mb-3 form-control">
-                <label class="col-sm-2 col-form-label" for="">Historia</label>
-                <input type="number" id="his" placeholder="Nota de Historia">
-
-            </div>
             <div class="form-group mb-2 text-end">
-                <button type="submit" id="addNotas" class="btn btn-dark btn-lg">Agregar Notas</button>
-            </div>
+                <button type="submit" id="btnIngresante" class="btn btn-dark">Buscar</button>
+            </div>    
+
+            <div class="form-group mb-2 text-end">
+                <span id="resultadoBusqueda"></span>
+            </div>    
         </form>
 
+        <!-- Form carga notas -->
+        <form class="bg-light" id="cargaNotas" action="">
+            <div class="form-group mb-3">
+                <label for="mat">Matemáticas</label>
+                <input class="form-control" type="number" id="mat" placeholder="Nota de Matemática">
+            </div>
+            <div class="form-group mb-3">
+                <label for="len">Lengua</label>
+                <input class="form-control" type="number" id="len" placeholder="Nota de Lengua">
+            </div>
+            <div class="form-group mb-3">
+                <label for="his">Historia</label>
+                <input class="form-control" type="number" id="his" placeholder="Nota de Historia">
+            </div>
+            <div class="form-group mb-2 text-end">
+                <button type="submit" id="addNotas" class="btn btn-dark">Agregar Notas</button>
+            </div>
+        </form>
     </div>
 
 

@@ -44,19 +44,41 @@ const alumnos = [];
 jsonAlumnos.Alumnos.forEach(alumno => {
     alumnos.push(new Alumno(alumno.nombre, alumno.notas.nMatematica, alumno.notas.nLengua, alumno.notas.nHistoria))
 })
+let encontrado = "undefine"
+
+
+const ingresantes = JSON.parse(sessionStorage.getItem('Ingresantes')) || []
+console.log(ingresantes)
+document.querySelector('#busqueda').addEventListener('submit', (event) => {
+    event.preventDefault()
+
+    const dni = event.target[0].value
+    console.log(dni)
+
+    encontrado = ingresantes.find((ingresante) => {
+        return ingresante.dni ===  dni
+    })
+
+    encontrado != undefined ? console.log(encontrado):console.error("no se encontro ningun alumno") 
+
+    if(encontrado != undefined){
+        document.querySelector('#resultadoBusqueda').innerHTML = `${encontrado.nombre}`
+    }
+})
 
 
 //Guardamos en la sesion local
 sessionStorage.setItem('alumnos', JSON.stringify(alumnos))
 
-document.querySelector('#falumno').addEventListener('submit', (Event) => {
-    Event.preventDefault()
+document.getElementById('cargaNotas').addEventListener('submit',(event)=>{
+    event.preventDefault()
 
+    console.log("Submit form carga notas")
     const NuevoAlumno = {
-        nombre: Event.target[0].value,
-        nMatematica: Event.target[1].value,
-        nLengua: Event.target[2].value,
-        nHistoria: Event.target[3].value
+        nombre: encontrado.nombre,
+        nMatematica: event.target[1].value,
+        nLengua: event.target[2].value,
+        nHistoria: event.target[3].value
     }
 
 
