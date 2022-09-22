@@ -36,58 +36,73 @@ const getAlumnos = async () => {
 }
 
 
-
-
 const jsonAlumnos = await getAlumnos()
 
 const alumnos = [];
 jsonAlumnos.Alumnos.forEach(alumno => {
     alumnos.push(new Alumno(alumno.nombre, alumno.notas.nMatematica, alumno.notas.nLengua, alumno.notas.nHistoria))
 })
+
+
+//Buscamos un ingresante para cargarle las notas..
 let encontrado = "undefine"
+let indexIngresante = "undefine"
+const marca = document.querySelector('#resultadoBusqueda')
 
-
-const ingresantes = JSON.parse(sessionStorage.getItem('Ingresantes')) || []
+const ingresantes = JSON.parse(localStorage.getItem('Ingresantes')) || []
 console.log(ingresantes)
+
 document.querySelector('#busqueda').addEventListener('submit', (event) => {
+
     event.preventDefault()
 
     const dni = event.target[0].value
     console.log(dni)
 
     encontrado = ingresantes.find((ingresante) => {
-        return ingresante.dni ===  dni
+        return ingresante.dni === dni
     })
 
-    encontrado != undefined ? console.log(encontrado):console.error("no se encontro ningun alumno") 
+    indexIngresante = ingresantes.findIndex((ingresante) => {
+        return ingresante.dni == dni
+    })
 
-    if(encontrado != undefined){
-        document.querySelector('#resultadoBusqueda').innerHTML = `${encontrado.nombre}`
+    encontrado != undefined ? console.log(encontrado) : console.error("no se encontro ningun alumno")
+
+    if (encontrado != undefined) {
+        marca.innerHTML = `El Alumno encontrado es: ${encontrado.nombre}`
+    } else {
+        marca.innerHTML = "El DNI no corresponde a un ingresante!!!"
     }
 })
 
 
 //Guardamos en la sesion local
-sessionStorage.setItem('alumnos', JSON.stringify(alumnos))
 
-document.getElementById('cargaNotas').addEventListener('submit',(event)=>{
+if (JSON.parse(localStorage.getItem('alumnos') === null)){
+    localStorage.setItem('alumnos', JSON.stringify(alumnos))
+} else {
+   const storageAlumnos = JSON.parse(localStorage.getItem("alumnos"))
+}
+
+document.getElementById('cargaNotas').addEventListener('submit', (event) => {
     event.preventDefault()
 
     console.log("Submit form carga notas")
     const NuevoAlumno = {
         nombre: encontrado.nombre,
-        nMatematica: event.target[1].value,
-        nLengua: event.target[2].value,
-        nHistoria: event.target[3].value
+        nMatematica: parseInt(event.target[0].value),
+        nLengua: parseInt(event.target[1].value),
+        nHistoria: parseInt(event.target[2].value)
     }
 
 
     alumnos.push(new Alumno(NuevoAlumno.nombre, NuevoAlumno.nMatematica, NuevoAlumno.nLengua, NuevoAlumno.nHistoria))
-    console.log(NuevoAlumno)
+    console.log("nuevo alu" + NuevoAlumno)
 
     // agregar un nuevo alumno y guardarlo... ?????
 
-    sessionStorage.setItem('alumnos', JSON.stringify(alumnos))
+    localStorage.setItem('alumnos', JSON.stringify(alumnos))
     // //se limpia el folmuria
     document.querySelector('#dniAlumno').value = ""
     document.querySelector('#mat').value = ""
@@ -102,12 +117,16 @@ document.getElementById('cargaNotas').addEventListener('submit',(event)=>{
         title: 'Las Notas Fueron Cargadas',
         showConfirmButton: false,
         timer: 1000
-      })
+    })
+
+
+
+    const saveAlumnos = JSON.parse(localStorage.getItem("alumnos")) || []
+    saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")
 
 })
 // se utiliza para remplaza el QuerySelector
 const curso = document.querySelector('#curso')
-console.log(curso)
 
 const listaAlumnos = (alumnos) => {
     let Lista = ""
@@ -123,11 +142,9 @@ const listaAlumnos = (alumnos) => {
         </tr>`
     })
     curso.innerHTML = Lista
-    // es rempazado por la variable. "curso"
-    //  document.querySelector("#curso").innerHTML = Lista
 }
 
-const saveAlumnos = JSON.parse( sessionStorage.getItem("alumnos")) || []
-saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")
+ const saveAlumnos = JSON.parse( localStorage.getItem("alumnos")) || []
+ saveAlumnos != 0 ? listaAlumnos(saveAlumnos) : console.error("no hay alumnos guardados")
 
 

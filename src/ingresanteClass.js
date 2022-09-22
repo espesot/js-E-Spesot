@@ -41,5 +41,4 @@ const validarIngresante = (ingresantes, nuevoIngresante) => {
 }
 
 
-//const ingresante = new ingresante()
 export {Ingresante, validarIngresante}

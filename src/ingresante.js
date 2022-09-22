@@ -1,7 +1,7 @@
 import { Ingresante, validarIngresante } from "./ingresanteClass.js"
 
 //---------- Aplicamos operador OR
-const ingresantes = JSON.parse(sessionStorage.getItem('Ingresantes')) || []
+const ingresantes = JSON.parse(localStorage.getItem('Ingresantes')) || []
 
 
 // utilizamos el evento del boton para agregar los campos del formulario con id ingresante
@@ -16,7 +16,6 @@ document.querySelector('#fingresante').addEventListener('submit', (Event) => {
         email: Event.target[3].value,
         fnacimiento: Event.target[4].value,
     }
-    console.log(NuevoIngresante)
     if (NuevoIngresante.nombre && NuevoIngresante.apellido && NuevoIngresante.dni && NuevoIngresante.email && NuevoIngresante.fnacimiento) {
 
         //añadimos el ingresante a la clase
@@ -37,10 +36,9 @@ document.querySelector('#fingresante').addEventListener('submit', (Event) => {
                     ingresantes.push(new Ingresante(NuevoIngresante.nombre, NuevoIngresante.apellido, NuevoIngresante.dni, NuevoIngresante.email, NuevoIngresante.fnacimiento))
 
                     //guardamos en el sesionStorage el ingresante
-                    sessionStorage.setItem('Ingresantes', JSON.stringify(ingresantes))
+                    localStorage.setItem('Ingresantes', JSON.stringify(ingresantes))
 
                     ingresantes.lenght != 0 ? dibujarListaIngresantes(ingresantes) : console.info("no hay ingresante par dibujar")
-                    //dibujarListaIngresantes(ingresantes)
 
                     //se limpia el formulario
                     document.querySelector('#nomIns').value = ""
